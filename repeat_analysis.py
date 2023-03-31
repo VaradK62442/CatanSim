@@ -1,14 +1,10 @@
-# TODO
-# average game lasts 80 rounds
-# add feature to generate new board after 80 rounds
-# analyse average roll and resource distribution across all games
-
 from main import gen_board, simulate
 import matplotlib.pyplot as plt
+import time
 
 def game_sim():
     counts, rolls = [], []
-    reps = 1_000
+    reps = 1_000_000
 
     for _ in range(reps):
         board = gen_board()
@@ -32,20 +28,20 @@ def plot(data, fig_num):
         for k in elt:
             all_vals[k].append(elt[k])
 
-    id_to_val = []
-    for k in all_vals:
-        id_to_val.append({i:all_vals[k][i] for i in all_vals[k]})
+    # scatter plots of all values do not provide helpful information
 
-    # plot dict of all values
-    plt.figure(fig_num)
-    for i, elt in enumerate(id_to_val):  
-        # to generate separate plots:  
-        # plt.figure(fig_num+i)
-        plt.scatter([k for k in elt], [elt[k] for k in elt], label=f"{[name for name in all_vals][i]}")
-        plt.ylabel("Number of times X was generated")
-        plt.xlabel("X")
-        plt.title("Frequency of generating X")
-        plt.legend()
+    # iteration = list(range(len(data)))
+
+    # # plot dict of all values
+    # plt.figure(fig_num)
+    # for name in all_vals:  
+    #     # to generate separate plots:  
+    #     # plt.figure(fig_num+[k for k in all_vals].index(name))
+    #     plt.scatter(iteration, all_vals[name], label=name)
+    #     plt.ylabel("Number of times X was generated")
+    #     plt.xlabel("X")
+    #     plt.title("Frequency of generating X")
+    #     plt.legend()
 
     # create dict mapping keys to average values
     avg_vals = {}
@@ -53,8 +49,13 @@ def plot(data, fig_num):
     for elt in all_vals:
         avg_vals[elt] = sum(all_vals[elt]) / len(all_vals[elt])
 
+    # print out results
+    for elt in avg_vals:
+        print(f"{elt} was generated {avg_vals[elt]} times on average")
+    print()
+
     # plot dict of average values
-    plt.figure(fig_num+10*fig_num)
+    plt.figure(fig_num*10+fig_num)
     plt.bar([k for k in avg_vals], [avg_vals[k] for k in avg_vals])
     plt.ylabel("Average number of times X was generated")
     plt.xlabel("X")
@@ -62,9 +63,13 @@ def plot(data, fig_num):
 
 
 def main():
+    start_time = time.time()
+
     counts, rolls = game_sim()
     plot(counts, 1)
-    plot(rolls, 10)
+    plot(rolls, 2)
+
+    print("--- %s seconds ---" % (time.time() - start_time))
 
     plt.show()
 
