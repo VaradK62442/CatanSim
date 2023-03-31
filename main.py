@@ -2,7 +2,6 @@ import random
 import tkinter as tk
 from math import sqrt
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
 # generating the board
@@ -76,11 +75,11 @@ def display_results(board, count, rolls):
     # radius of hexagon
     r = 50
 
-    canvas = tk.Canvas(board_frame, width=f"{16*r}", height=f"{17*r}")
+    canvas = tk.Canvas(board_frame, width=f"{16*r}", height=f"{16*r}")
     canvas.grid()
 
     base_xs = [6*r, 5*r, 4*r, 5*r, 6*r]
-    base_y = 0.5*r
+    base_y = 2.3*r # 4*r - 1.7*r
 
     for i, row in enumerate(board):
         base_x = base_xs[i]
@@ -103,12 +102,21 @@ def display_results(board, count, rolls):
 
     count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1])}
 
+    plt.figure(1)
     plt.bar([k for k in count], [count[k] for k in count])
     plt.ylabel("Number of times resources was generated")
     plt.xlabel("Resource name")
     plt.title("Count of resources generated over multiple rolls")
-    plt.show()
 
+    # rolls = {k: v for k, v in sorted(rolls.items(), key=lambda item: item[1])}
+
+    plt.figure(2)
+    plt.bar([k for k in rolls], [rolls[k] for k in rolls])
+    plt.ylabel("Number of times a number was rolled")
+    plt.xlabel("Number rolled")
+    plt.title("Frequency of rolls")
+
+    plt.show()
     root.mainloop()
 
 
@@ -166,13 +174,26 @@ def simulate(board, reps):
         'ore': 0
     }
 
-    rolls = []
+    #  to count frequency of rolls
+    roll_freq = {
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0,
+        7: 0,
+        8: 0,
+        9: 0,
+        10: 0,
+        11: 0,
+        12: 0
+    }
 
     for _ in range(reps):
         # generate roll
         roll = random.randint(1, 6) + random.randint(1, 6)
 
-        rolls.append(roll)
+        roll_freq[roll] += 1
 
         # check which resources were generated
         for row in board:
@@ -180,13 +201,14 @@ def simulate(board, reps):
                 if tile.token == roll:
                     count[tile.type] += 1
 
-    return count, rolls
+
+    return count, roll_freq
 
 
 # main
 
 def main():
-    reps = 1_000
+    reps = 1_000_000
     board = gen_board()
     count, rolls = simulate(board, reps)
     display_results(board, count, rolls)
