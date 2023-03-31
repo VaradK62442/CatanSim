@@ -1,3 +1,9 @@
+# TODO
+# average game lasts 80 rounds
+# add feature to generate new board after 80 rounds
+# analyse average roll and resource distribution across all games
+
+
 import random
 import tkinter as tk
 from math import sqrt
