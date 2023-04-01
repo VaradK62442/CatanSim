@@ -96,7 +96,7 @@ def display_results(board, count, rolls):
 
 
     # display results
-    
+
     count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1])}
 
     plt.figure(1)
@@ -208,6 +208,14 @@ def main():
     reps = 1_000_000
     board = gen_board()
     count, rolls = simulate(board, reps)
+
+    # print results
+    for k in count:
+        print(f"{k} was generated {count[k]}")
+
+    for k in rolls:
+        print(f"{k} was rolled {rolls[k]}")
+
     display_results(board, count, rolls)
 
 
