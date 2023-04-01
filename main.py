@@ -211,10 +211,12 @@ def main():
 
     # print results
     for k in count:
-        print(f"{k} was generated {count[k]}")
+        print(f"{k} was generated {count[k]} times")
+
+    print()
 
     for k in rolls:
-        print(f"{k} was rolled {rolls[k]}")
+        print(f"{k} was rolled {rolls[k]} times")
 
     display_results(board, count, rolls)
 
