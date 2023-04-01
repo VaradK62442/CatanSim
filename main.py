@@ -96,10 +96,7 @@ def display_results(board, count, rolls):
 
 
     # display results
-
-    res_frame = tk.Frame(root, relief=tk.GROOVE, borderwidth=3)
-    res_frame.pack()
-
+    
     count = {k: v for k, v in sorted(count.items(), key=lambda item: item[1])}
 
     plt.figure(1)
