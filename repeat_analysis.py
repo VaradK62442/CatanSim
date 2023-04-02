@@ -51,7 +51,7 @@ def plot(data, fig_num):
 
     # print out results
     for elt in avg_vals:
-        print(f"{elt} was generated {avg_vals[elt]} times on average")
+        print(f"{elt} was generated {round(avg_vals[elt], 4)} times on average")
     print()
 
     # plot dict of average values
