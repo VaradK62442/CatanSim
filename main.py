@@ -9,10 +9,10 @@ import matplotlib.pyplot as plt
 # rules for generation:
 #   randomly place terrain tiles
 #   allocate tokens in order from top left moving anti-clockwise in a spiral
-#   (skipping over dessert)
+#   (skipping over desert)
 
 # terrain tiles
-#   dessert - 1
+#   desert - 1
 #   wheat - 4
 #   sheep - 4
 #   wood - 4
@@ -45,7 +45,7 @@ def display_results(board, count, rolls):
     # function to draw hexagon with given radius, and (x, y) offset
     def draw_hex(r, off_x, off_y):
         colours = {
-            'dessert': '#ffea00',
+            'desert': '#ffea00',
             'wheat': '#fc9642',
             'sheep': '#c1fc42',
             'wood': '#55fc42',
@@ -123,7 +123,7 @@ def gen_board():
     # generate a standard board
     # rows of 3, 4, 5, 4, 3 tiles
     board = []
-    tiles = ['dessert'] + ["wheat"]*4 + ['sheep']*4 + ['wood']*4 + ['brick']*3 + ['ore']*3
+    tiles = ['desert'] + ["wheat"]*4 + ['sheep']*4 + ['wood']*4 + ['brick']*3 + ['ore']*3
     
     # allocate tile types
     for i in range(5):
@@ -152,7 +152,7 @@ def gen_board():
 
     for row in board:
         for tile in row:
-            if tile.type != "dessert":
+            if tile.type != "desert":
                 tile.token = tokens[0]
                 tokens = tokens[1:]
 
@@ -163,7 +163,7 @@ def gen_board():
  
 def simulate(board, reps):
     count = {
-        'dessert': 0,
+        'desert': 0,
         'wheat': 0,
         'sheep': 0,
         'wood': 0,
