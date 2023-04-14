@@ -124,28 +124,44 @@ def gen_board():
     # rows of 3, 4, 5, 4, 3 tiles
     board = []
     tiles = ['dessert'] + ["wheat"]*4 + ['sheep']*4 + ['wood']*4 + ['brick']*3 + ['ore']*3
+
+    # dictionary mapping i to number of repetitions
+    rep_num = {
+        0: 3,
+        1: 4,
+        2: 5,
+        3: 4,
+        4: 3
+    }
     
     # allocate tile types
     for i in range(5):
         board.append([])
-        if i == 0 or i == 4:
-            for _ in range(3):
-                tile_choice = random.choice(tiles)
-                tile = Tile(tile_choice, 7)
-                board[i].append(tile)
-                tiles.remove(tile_choice)
-        elif i == 1 or i == 3:
-            for _ in range(4):
-                tile_choice = random.choice(tiles)
-                tile = Tile(tile_choice, 7)
-                board[i].append(tile)
-                tiles.remove(tile_choice)
-        else:
-            for _ in range(5):
-                tile_choice = random.choice(tiles)
-                tile = Tile(tile_choice, 7)
-                board[i].append(tile)
-                tiles.remove(tile_choice)
+        # using dictionary:
+        for _ in range(rep_num[i]):
+            tile_choice = random.choice(tiles)
+            tile = Tile(tile_choice, 7)
+            board[i].append(tile)
+            tiles.remove(tile_choice)
+
+        # if i == 0 or i == 4:
+        #     for _ in range(3):
+        #         tile_choice = random.choice(tiles)
+        #         tile = Tile(tile_choice, 7)
+        #         board[i].append(tile)
+        #         tiles.remove(tile_choice)
+        # elif i == 1 or i == 3:
+        #     for _ in range(4):
+        #         tile_choice = random.choice(tiles)
+        #         tile = Tile(tile_choice, 7)
+        #         board[i].append(tile)
+        #         tiles.remove(tile_choice)
+        # else:
+        #     for _ in range(5):
+        #         tile_choice = random.choice(tiles)
+        #         tile = Tile(tile_choice, 7)
+        #         board[i].append(tile)
+        #         tiles.remove(tile_choice)
 
     # allocate token
     tokens = [5, 10, 8, 2, 9, 11, 4,6, 4, 3, 11, 3, 5, 6, 12, 8, 10, 9]
