@@ -123,7 +123,7 @@ def gen_board():
     # generate a standard board
     # rows of 3, 4, 5, 4, 3 tiles
     board = []
-    tiles = ['dessert'] + ["wheat"]*4 + ['sheep']*4 + ['wood']*4 + ['brick']*3 + ['ore']*3
+    tiles = ['desert'] + ["wheat"]*4 + ['sheep']*4 + ['wood']*4 + ['brick']*3 + ['ore']*3
 
     # dictionary mapping i to number of repetitions
     rep_num = {
